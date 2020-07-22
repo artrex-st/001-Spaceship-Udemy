@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2105913494}
   - component: {fileID: 2105913495}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 719826003180822227}
   - component: {fileID: 719826003180822224}
   - component: {fileID: 3097581208863117082}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -174,7 +174,7 @@ MonoBehaviour:
   - {fileID: 1626707168461546, guid: 79e4c0d1647edb24e82e40e6b4bcaa7b, type: 3}
   - {fileID: 1946970332979032, guid: 6647bc14b7f253f4aa7ed042ccbd8304, type: 3}
   bullet: {fileID: 6520361158328062334, guid: 01de01a1872081c4584679ce6b4af073, type: 3}
-  explosionEffect: {fileID: 5431569552068551548, guid: 55dba01f3f40a804a8501ec9ad379a64,
+  explosionEffect: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1,
     type: 3}
 --- !u!82 &719826003180822224
 AudioSource:

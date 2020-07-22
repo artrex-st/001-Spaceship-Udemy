@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Bullet;
     public AudioClip shotSound;
     private Transform _selection;
+    public LayerMask layerEnemy;
 
     private void Start()
     {
@@ -33,17 +34,14 @@ public class PlayerController : MonoBehaviour
             _selection = null;
         }
         RaycastHit hit;
-        if (Physics.Raycast(firePointLeft.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity) || Physics.Raycast(firePointRight.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        if (Physics.Raycast(firePointLeft.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerEnemy) || Physics.Raycast(firePointRight.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerEnemy))
         {
             //Debug.DrawRay(firePointLeft.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
             //Debug.DrawRay(firePointRight.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             //Debug.Log($"Raycast hit: {hit.transform.name} @@@@@@");
             
-            if (hit.transform.CompareTag("Enemy"))
-            {
-                hit.transform.GetComponentInChildren<Light>().enabled = true;
-                _selection = hit.transform;
-            }
+            hit.transform.GetComponentInChildren<Light>().enabled = true;
+            _selection = hit.transform;
         }
 
 

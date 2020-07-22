@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public Transform firePointRight, firePointLeft;
     public GameObject Bullet;
     public AudioClip shotSound;
+    private Transform _selection;
 
     private void Start()
     {
@@ -22,6 +23,33 @@ public class PlayerController : MonoBehaviour
             shoot();
             cd = 0;
         }
+
+        ///
+
+
+        if (_selection != null)
+        {
+            _selection.GetComponentInChildren<Light>().enabled = false;
+            _selection = null;
+        }
+        RaycastHit hit;
+        if (Physics.Raycast(firePointLeft.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity) || Physics.Raycast(firePointRight.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        {
+            //Debug.DrawRay(firePointLeft.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
+            //Debug.DrawRay(firePointRight.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+            //Debug.Log($"Raycast hit: {hit.transform.name} @@@@@@");
+            
+            if (hit.transform.CompareTag("Enemy"))
+            {
+                hit.transform.GetComponentInChildren<Light>().enabled = true;
+                _selection = hit.transform;
+            }
+        }
+
+
+
+        ///
+
     }
 
     private void Move()
@@ -41,5 +69,4 @@ public class PlayerController : MonoBehaviour
         GetComponent<AudioSource>().clip = shotSound;
         GetComponent<AudioSource>().Play();
     }
-
 }

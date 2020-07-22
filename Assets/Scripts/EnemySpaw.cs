@@ -9,6 +9,10 @@ public class EnemySpaw : MonoBehaviour
     [Range(0,10)]
     public float cd;
 
+    private void Start()
+    {
+        Debug.Log("Screen Height : " + Screen.height);
+    }
     // Update is called once per frame
     void Update()
     {

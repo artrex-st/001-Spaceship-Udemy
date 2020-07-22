@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,8 +11,10 @@ public class Enemy : MonoBehaviour
     public GameObject bullet;
     public static float bulletspeed;
     public GameObject explosionEffect;
+    public static Boolean targetOn;
 
-    
+
+
     void Start()
     {
         int i = Random.Range(0,rngEnemy.Length);
@@ -19,7 +23,7 @@ public class Enemy : MonoBehaviour
         enemyHealth = i * 2f;
         enemySpeed = (5 * enemyHealth) / (enemyattack + 1);
         bulletspeed = enemySpeed + enemyattack + 10;
-        Debug.Log($"Nave escolhida é a: {i}");
+        //Debug.Log($"Nave escolhida é a: {i}");
     }
 
     void Update()
@@ -57,4 +61,9 @@ public class Enemy : MonoBehaviour
             Instantiate(explosionEffect, transform.position, transform.rotation);
         }
     }
+    public void Lights(Boolean target)
+    {
+        GetComponentInChildren<Light>().enabled = target;
+    }
+
 }

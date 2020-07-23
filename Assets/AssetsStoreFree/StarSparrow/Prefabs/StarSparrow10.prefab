@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4315662119976812}
   - component: {fileID: 65140235074398992}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4395451056213646}
   - component: {fileID: 65832939490381918}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4579326816497194}
   - component: {fileID: 65207352381842574}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4302909975662490}
   - component: {fileID: 65296673173028458}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4538760402217446}
   - component: {fileID: 65528410742163446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4068277116383644}
   - component: {fileID: 65589669102534102}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 4889076547100212}
   - component: {fileID: 33413632727765270}
   - component: {fileID: 23496527303668514}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StarSparrow10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4790583904244516}
   - component: {fileID: 65436502949104086}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4030384987853080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

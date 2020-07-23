@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4433942057210488}
   - component: {fileID: 33144904916599870}
   - component: {fileID: 23649099192709106}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StarSparrow1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

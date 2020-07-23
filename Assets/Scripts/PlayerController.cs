@@ -1,14 +1,16 @@
-﻿using System;
+﻿using Packages.Rider.Editor.UnitTesting;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float left = -30, right = 30, top= 30, bot= -30, speed = 50, cd=1;
+    public Vector2 limit;
+    public float health, speed = 50, cd=1;
     public Transform firePointRight, firePointLeft;
     public GameObject bullet, explosion;
-    public AudioClip shotSound;
+    public AudioClip shotSound, hitSound;
     private Transform _selection;
     public LayerMask layerEnemy;
     public LineRenderer lineShot;
@@ -46,7 +48,6 @@ public class PlayerController : MonoBehaviour
         }
         //Debug.LogWarning($"raycast= {hit.point}");
 
-
         ///
 
     }
@@ -57,10 +58,13 @@ public class PlayerController : MonoBehaviour
         //Vector3 pos = new Vector3(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed) * Time.deltaTime;
         Vector3 pos = new Vector3(Input.GetAxis("Horizontal") * speed, 0) * Time.deltaTime;
         GetComponentInChildren<Animator>().SetFloat("Direction",pos.x);
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x + pos.x, right, left), Mathf.Clamp(transform.position.y + pos.y, bot, top),transform.position.z);
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x + pos.x, limit.x, -limit.x), Mathf.Clamp(transform.position.y + pos.y, limit.y, -limit.y),transform.position.z);
 
     }
-
+    public void ApplyDmg(float dmg)
+    {
+        health -= dmg;
+    }
     IEnumerator Shoot()
     {
         //Instantiate(bullet, firePointLeft.position, firePointLeft.rotation);
@@ -75,7 +79,6 @@ public class PlayerController : MonoBehaviour
             if (hitShot.transform.CompareTag("Enemy"))
             {
                 hitShot.transform.GetComponent<Enemy>().ApplyDmg(2);
-                hitShot.transform.GetComponent<AudioSource>().Play();
                 Instantiate(explosion, hitShot.point, transform.rotation);
             }
         }

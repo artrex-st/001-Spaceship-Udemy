@@ -33,10 +33,9 @@ public class EnemySpaw : MonoBehaviour
         {
             GameObject bossInstance = (GameObject)Instantiate(enemy, new Vector3(UnityEngine.Random.Range(left, right), UnityEngine.Random.Range(bot, top), distance), new Quaternion(transform.rotation.x, 180, transform.rotation.z, transform.rotation.w));
             bossON = true;
-            bossInstance.transform.localScale = Vector3.one * 10;
             bossInstance.GetComponent<Enemy>().isBoss = true;
             bossInstance.GetComponentInChildren<Light>().color = bossLightCollor;
-            bossInstance.GetComponentInChildren<Light>().range *= 10;
+            //bossInstance.GetComponentInChildren<Light>().range *= 10;
         }
     }
 }

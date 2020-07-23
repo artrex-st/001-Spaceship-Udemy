@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public static float bulletspeed;
     public GameObject explosionEffect;
     public static Boolean targetOn;
+    public Boolean isBoss;
 
 
 
@@ -19,6 +20,10 @@ public class Enemy : MonoBehaviour
     {
         int i = Random.Range(0,rngEnemy.Length);
         Instantiate(rngEnemy[i], transform.position, transform.rotation, gameObject.transform);
+        if (isBoss)
+        {
+            i = (i+2)*10;
+        }
         enemyattack = i * 2f;
         enemyHealth = i * 2f;
         enemySpeed = (5 * enemyHealth) / (enemyattack + 1);
@@ -28,7 +33,12 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(0, 0, enemySpeed * -Time.deltaTime);
+        if (transform.localScale.x == 1)
+        {
+            transform.position += new Vector3(0, 0, enemySpeed * -Time.deltaTime);
+        }
+        else
+            BossMove();
         cd += Time.deltaTime;
         if (enemyattack>0 && cd >= shootRate)
         {
@@ -37,7 +47,12 @@ public class Enemy : MonoBehaviour
         }
 
     }
-
+    private void BossMove()
+    {
+        Vector3 pos = new Vector3(Input.GetAxis("Horizontal") * enemySpeed, 0) * Time.deltaTime;
+        GetComponentInChildren<Animator>().SetFloat("Direction", pos.x);
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x + pos.x, 20, -20), Mathf.Clamp(transform.position.y + pos.y, 0, 0), transform.position.z);
+    }
     private void shoot()
     {
         Instantiate(bullet, new Vector3(transform.position.x, transform.position.y, transform.position.z-10), transform.rotation);

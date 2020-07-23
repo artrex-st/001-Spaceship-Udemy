@@ -7,10 +7,11 @@ public class PlayerController : MonoBehaviour
 {
     public float left = -30, right = 30, top= 30, bot= -30, speed = 50, cd=1;
     public Transform firePointRight, firePointLeft;
-    public GameObject Bullet;
+    public GameObject bullet, explosion;
     public AudioClip shotSound;
     private Transform _selection;
     public LayerMask layerEnemy;
+    public LineRenderer lineShot;
 
     private void Start()
     {
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
         Move();
         if (Input.GetButtonDown("Fire1") && cd >=1)
         {
-            shoot();
+            StartCoroutine(Shoot());
             cd = 0;
         }
 
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
             hit.transform.GetComponentInChildren<Light>().enabled = true;
             _selection = hit.transform;
         }
-
+        //Debug.LogWarning($"raycast= {hit.point}");
 
 
         ///
@@ -60,11 +61,52 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void shoot()
+    IEnumerator Shoot()
     {
-        Instantiate(Bullet, firePointLeft.position, firePointLeft.rotation);
-        Instantiate(Bullet, firePointRight.position, firePointRight.rotation);
+        //Instantiate(bullet, firePointLeft.position, firePointLeft.rotation);
+        //Instantiate(bullet, firePointRight.position, firePointRight.rotation);
         GetComponent<AudioSource>().clip = shotSound;
         GetComponent<AudioSource>().Play();
+        RaycastHit hitShot;
+        if (Physics.Raycast(firePointLeft.position, transform.TransformDirection(Vector3.forward), out hitShot, Mathf.Infinity))
+        {
+            lineShot.SetPosition(0, firePointLeft.position);
+            lineShot.SetPosition(1, hitShot.point);
+            if (hitShot.transform.CompareTag("Enemy"))
+            {
+                hitShot.transform.GetComponent<Enemy>().ApplyDmg(2);
+                hitShot.transform.GetComponent<AudioSource>().Play();
+                Instantiate(explosion, hitShot.point, transform.rotation);
+            }
+        }
+        else
+        {
+            lineShot.SetPosition(0, firePointLeft.position);
+            lineShot.SetPosition(1, firePointLeft.position + firePointLeft.position * 350);
+        }
+        lineShot.enabled = true;
+        yield return 0.02f;
+        lineShot.enabled = false;
+
+        RaycastHit hitShotR;
+        if (Physics.Raycast(firePointRight.position, transform.TransformDirection(Vector3.forward), out hitShotR, Mathf.Infinity))
+        {
+            lineShot.SetPosition(0, firePointRight.position);
+            lineShot.SetPosition(1, hitShotR.point);
+            if (hitShotR.transform.CompareTag("Enemy"))
+            {
+                hitShotR.transform.GetComponent<Enemy>().ApplyDmg(2);
+                hitShotR.transform.GetComponent<AudioSource>().Play();
+                Instantiate(explosion, hitShotR.point, transform.rotation);
+            }
+        }
+        else
+        {
+            lineShot.SetPosition(0, firePointRight.position);
+            lineShot.SetPosition(1, firePointRight.position + firePointRight.position * 350);
+        }
+        lineShot.enabled = true;
+        yield return 0.02f;
+        lineShot.enabled = false;
     }
 }
